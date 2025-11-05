@@ -24,7 +24,7 @@
                                 <Label Text="Süre: {Binding Sure}" />
                                 <Label Text="Koç Notu: {Binding KoçNotu}" />
                                 <Button Text="Planı İncele"
-                                        Command="{Binding Source={x:Reference ExercisePlannerPage}, Path=BindingContext.PlanSecCommand}"
+                                        Command="{Binding Path=BindingContext.PlanSecCommand, RelativeSource={RelativeSource AncestorType={x:Type ContentPage}}}"
                                         CommandParameter="{Binding}" />
                             </VerticalStackLayout>
                         </Frame>
