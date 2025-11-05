@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
+             xmlns:models="clr-namespace:Yesil.Models"
              x:Class="Yesil.Views.CommunityView"
              x:DataType="viewmodels:CommunityViewModel"
              Title="Topluluk">
@@ -10,7 +11,7 @@
             <Label Text="Topluluk tavsiyeleri" FontSize="22" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding Girdiler}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:ToplulukGirdisi">
                         <Frame CornerRadius="18" Padding="16" Margin="0,6" HasShadow="True">
                             <VerticalStackLayout Spacing="6">
                                 <Label Text="{Binding Baslik}" FontAttributes="Bold" />

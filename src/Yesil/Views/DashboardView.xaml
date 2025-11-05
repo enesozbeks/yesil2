@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
              xmlns:components="clr-namespace:Yesil.Components"
+             xmlns:models="clr-namespace:Yesil.Models"
              x:Class="Yesil.Views.DashboardView"
              x:DataType="viewmodels:DashboardViewModel"
              Title="Pano">
@@ -24,7 +25,7 @@
                     <GridItemsLayout Orientation="Vertical" Span="1" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="components:ProgressCardViewModel">
                         <components:ProgressCard BindingContext="{Binding}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -33,7 +34,7 @@
             <Label Text="Yapay Zekâ Önerileri" FontSize="20" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding Oneriler}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:YapayZekaOnerisi">
                         <Frame CornerRadius="16" Padding="16" Margin="0,8" BackgroundColor="White" HasShadow="True">
                             <VerticalStackLayout Spacing="6">
                                 <Label Text="{Binding Baslik}" FontAttributes="Bold" />

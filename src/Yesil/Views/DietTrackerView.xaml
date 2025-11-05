@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
              xmlns:converters="clr-namespace:Yesil.Converters"
+             xmlns:models="clr-namespace:Yesil.Models"
+             xmlns:behaviors="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              x:Class="Yesil.Views.DietTrackerView"
              x:DataType="viewmodels:DietTrackerViewModel"
              Title="Beslenme">
@@ -19,7 +21,7 @@
                 <Label Text="Popüler Besinler" FontSize="20" FontAttributes="Bold" />
                 <CollectionView ItemsSource="{Binding Besinler}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="models:FoodItem">
                             <Frame Padding="12" CornerRadius="14" Margin="0,6" HasShadow="True">
                                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
                                     <Label Text="{Binding Ad}" FontAttributes="Bold" />
@@ -42,7 +44,7 @@
                 <Label Text="Besin Envanteri" FontSize="20" FontAttributes="Bold" />
                 <CollectionView ItemsSource="{Binding Envanter}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="models:BesinEnvanterOgeleri">
                             <StackLayout Orientation="Horizontal" Spacing="12">
                                 <Label Text="{Binding Ad}" />
                                 <Label Text="{Binding Miktar}" />
@@ -55,14 +57,18 @@
                 <Label Text="Alışveriş Listesi" FontSize="20" FontAttributes="Bold" />
                 <CollectionView ItemsSource="{Binding AlisverisListesi}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="models:AlisverisOgeleri">
                             <Frame Padding="10" CornerRadius="12" Margin="0,4" HasShadow="True">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <Label Text="{Binding Ad}" />
                                     <CheckBox Grid.Column="1"
-                                              IsChecked="{Binding Tamamlandi}"
-                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:DietTrackerViewModel}}, Path=AlisverisGuncelleCommand}"
-                                              CommandParameter="{Binding}" />
+                                              IsChecked="{Binding Tamamlandi}">
+                                        <CheckBox.Behaviors>
+                                            <behaviors:EventToCommandBehavior EventName="CheckedChanged"
+                                                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:DietTrackerViewModel}}, Path=AlisverisGuncelleCommand}"
+                                                                             CommandParameter="{Binding}" />
+                                        </CheckBox.Behaviors>
+                                    </CheckBox>
                                 </Grid>
                             </Frame>
                         </DataTemplate>

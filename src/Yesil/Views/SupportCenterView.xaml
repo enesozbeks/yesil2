@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
              xmlns:converters="clr-namespace:Yesil.Converters"
+             xmlns:models="clr-namespace:Yesil.Models"
              x:Class="Yesil.Views.SupportCenterView"
              x:DataType="viewmodels:SupportCenterViewModel"
              Title="Destek">
@@ -14,7 +15,7 @@
             <Label Text="Doktor ve Uzman Destekleri" FontSize="22" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding Uzmanlar}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:UzmanDestegi">
                         <Frame CornerRadius="16" Padding="16" Margin="0,8" HasShadow="True">
                             <VerticalStackLayout Spacing="4">
                                 <Label Text="{Binding AdSoyad}" FontAttributes="Bold" />
@@ -30,7 +31,7 @@
             <Label Text="Planlanan Seanslar" FontSize="20" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding Seanslar}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:PsikolojikDestekSeansi">
                         <Frame CornerRadius="14" Padding="14" Margin="0,6" HasShadow="True">
                             <VerticalStackLayout Spacing="4">
                                 <Label Text="{Binding TerapiTuru}" FontAttributes="Bold" />
