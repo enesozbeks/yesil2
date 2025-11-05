@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
+             xmlns:converters="clr-namespace:Yesil.Converters"
+             xmlns:models="clr-namespace:Yesil.Models"
+             xmlns:behaviors="clr-namespace:Yesil.Behaviors"
+             x:Class="Yesil.Views.DietTrackerView"
+             x:DataType="viewmodels:DietTrackerViewModel"
+             x:Name="DietTrackerPage"
+             Title="Beslenme">
+    <ContentPage.Resources>
+        <converters:ScoreToBadgeConverter x:Key="scoreToBadge" />
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto,*">
+        <StackLayout Padding="20" Spacing="12">
+            <Entry Placeholder="Besin ara" Text="{Binding AramaMetni}" />
+            <Label Text="Toplam Kalori: {Binding ToplamKalori, StringFormat='{0:F0} kcal'}" FontAttributes="Bold" />
+        </StackLayout>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="16">
+                <Label Text="Popüler Besinler" FontSize="20" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding Besinler}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FoodItem">
+                            <Frame Padding="12" CornerRadius="14" Margin="0,6" HasShadow="True">
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                                    <Label Text="{Binding Ad}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Kalori, StringFormat='{0} kcal'}" Grid.Row="1" />
+                                    <Label Text="{Binding Natureskor, Converter={StaticResource scoreToBadge}, StringFormat='Doğa Skoru: {0}'}" Grid.Row="2" />
+                                    <StackLayout Grid.RowSpan="3" Grid.Column="1" Spacing="6" Margin="10,0,0,0">
+                                        <Button Text="Ekle"
+                                                Command="{Binding Path=BindingContext.YiyecekEkleCommand, RelativeSource={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                CommandParameter="{Binding}" />
+                                        <Button Text="Envanter"
+                                                Command="{Binding Path=BindingContext.EnvantereEkleCommand, RelativeSource={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                CommandParameter="{Binding}" />
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Besin Envanteri" FontSize="20" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding Envanter}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:BesinEnvanterOgeleri">
+                            <StackLayout Orientation="Horizontal" Spacing="12">
+                                <Label Text="{Binding Ad}" />
+                                <Label Text="{Binding Miktar}" />
+                                <Label Text="{Binding Birim}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Alışveriş Listesi" FontSize="20" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding AlisverisListesi}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:AlisverisOgeleri">
+                            <Frame Padding="10" CornerRadius="12" Margin="0,4" HasShadow="True">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="{Binding Ad}" />
+                                    <CheckBox Grid.Column="1"
+                                              IsChecked="{Binding Tamamlandi}">
+                                        <CheckBox.Behaviors>
+                                            <behaviors:CheckedChangedToCommandBehavior
+                                                Command="{Binding Path=BindingContext.AlisverisGuncelleCommand, RelativeSource={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                CommandParameter="{Binding}" />
+                                        </CheckBox.Behaviors>
+                                    </CheckBox>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

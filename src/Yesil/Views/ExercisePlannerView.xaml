@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
+             xmlns:converters="clr-namespace:Yesil.Converters"
+             xmlns:models="clr-namespace:Yesil.Models"
+             x:Class="Yesil.Views.ExercisePlannerView"
+             x:DataType="viewmodels:ExercisePlannerViewModel"
+             x:Name="ExercisePlannerPage"
+             Title="Egzersiz">
+    <ContentPage.Resources>
+        <converters:CompletionToColorConverter x:Key="completionToColor" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Label Text="Planını seç ve hareket et!" FontSize="22" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Planlar}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:EgzersizPlanı">
+                        <Frame CornerRadius="16" Padding="16" Margin="0,10" HasShadow="True">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="{Binding Baslik}" FontSize="18" FontAttributes="Bold" />
+                                <Label Text="Seviye: {Binding Seviye}" />
+                                <Label Text="Süre: {Binding Sure}" />
+                                <Label Text="Koç Notu: {Binding KoçNotu}" />
+                                <Button Text="Planı İncele"
+                                        Command="{Binding Path=BindingContext.PlanSecCommand, RelativeSource={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Günlük Aktivite Önerileri" FontSize="20" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding AktiviteOnerileri}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:AktiviteKaydi">
+                        <Frame Padding="12" CornerRadius="12" Margin="0,6" HasShadow="True">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding AktiviteAd}" FontAttributes="Bold" />
+                                <Label Text="Adım: {Binding AdimSayisi}" />
+                                <Label Text="Kalori: {Binding YakilanKalori, StringFormat='{0:F0} kcal'}" />
+                                <Label Text="Süre: {Binding Sure}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

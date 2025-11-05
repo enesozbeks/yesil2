@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
+             xmlns:components="clr-namespace:Yesil.Components"
+             xmlns:models="clr-namespace:Yesil.Models"
+             x:Class="Yesil.Views.DashboardView"
+             x:DataType="viewmodels:DashboardViewModel"
+             Title="Pano">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Label Text="Merhaba, Yeşil yolculuğuna hoş geldin!" FontSize="22" FontAttributes="Bold" />
+
+            <Frame BackgroundColor="{StaticResource PrimaryColor}" CornerRadius="18" Padding="16">
+                <VerticalStackLayout>
+                    <Label Text="Hava Durumu" TextColor="White" FontAttributes="Bold" />
+                    <Label Text="{Binding HavaDurumu.Konum}" TextColor="White" />
+                    <Label Text="{Binding HavaDurumu.Durum}" TextColor="White" />
+                    <Label Text="{Binding HavaDurumu.SıcaklıkC, StringFormat='{0}°C'}" TextColor="White" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Kartlar}" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="components:ProgressCardViewModel">
+                        <components:ProgressCard BindingContext="{Binding}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Yapay Zekâ Önerileri" FontSize="20" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Oneriler}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:YapayZekaOnerisi">
+                        <Frame CornerRadius="16" Padding="16" Margin="0,8" BackgroundColor="White" HasShadow="True">
+                            <VerticalStackLayout Spacing="6">
+                                <Label Text="{Binding Baslik}" FontAttributes="Bold" />
+                                <Label Text="{Binding Aciklama}" />
+                                <Label Text="Öncelik: {Binding Oncelik}" FontAttributes="Italic" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

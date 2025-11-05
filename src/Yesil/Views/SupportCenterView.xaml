@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
+             xmlns:converters="clr-namespace:Yesil.Converters"
+             xmlns:models="clr-namespace:Yesil.Models"
+             x:Class="Yesil.Views.SupportCenterView"
+             x:DataType="viewmodels:SupportCenterViewModel"
+             Title="Destek">
+    <ContentPage.Resources>
+        <converters:CompletionToColorConverter x:Key="completionToColor" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Label Text="Doktor ve Uzman Destekleri" FontSize="22" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Uzmanlar}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:UzmanDestegi">
+                        <Frame CornerRadius="16" Padding="16" Margin="0,8" HasShadow="True">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding AdSoyad}" FontAttributes="Bold" />
+                                <Label Text="Uzmanlık: {Binding UzmanlikAlanlari[0]}" />
+                                <Label Text="İletişim: {Binding Iletisim}" />
+                                <Label Text="Çalışma Saatleri: {Binding CalismaSaatleri}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Planlanan Seanslar" FontSize="20" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Seanslar}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:PsikolojikDestekSeansi">
+                        <Frame CornerRadius="14" Padding="14" Margin="0,6" HasShadow="True">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding TerapiTuru}" FontAttributes="Bold" />
+                                <Label Text="Danışman: {Binding Danisman}" />
+                                <Label Text="Durum: {Binding Durum}" />
+                                <Label Text="Odak: {Binding OdakNoktasi}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Yeni Seans Planla" Command="{Binding SeansPlanlaCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
