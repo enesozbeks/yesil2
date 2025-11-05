@@ -5,7 +5,6 @@ namespace Yesil.ViewModels;
 public interface IAsyncCommand : ICommand
 {
     Task ExecuteAsync(object? parameter = null);
-    bool CanExecute(object? parameter);
 }
 
 public class AsyncCommand : IAsyncCommand
