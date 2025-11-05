@@ -2,6 +2,9 @@ namespace Yesil.Services;
 
 public class NavigationService
 {
+    private static readonly object RoutesLock = new();
+    private static readonly HashSet<string> RegisteredRoutes = new();
+
     private readonly IServiceProvider _serviceProvider;
 
     public NavigationService(IServiceProvider serviceProvider)
@@ -12,19 +15,30 @@ public class NavigationService
     public async Task NavigateToAsync<TView>() where TView : Page
     {
         var page = _serviceProvider.GetRequiredService<TView>();
-        var window = Application.Current?.Windows.FirstOrDefault();
+        var route = typeof(TView).Name;
 
-        if (window?.Page is Shell shell)
+        var shouldRegister = false;
+        lock (RoutesLock)
         {
-            var route = typeof(TView).FullName ?? typeof(TView).Name;
-            if (!Routing.TryGetRoute(route, out _))
+            if (RegisteredRoutes.Add(route))
             {
-                Routing.RegisterRoute(route, typeof(TView));
+                shouldRegister = true;
             }
-
-            await shell.GoToAsync(route);
         }
-        else if (window is not null)
+
+        if (shouldRegister)
+        {
+            Routing.RegisterRoute(route, typeof(TView));
+        }
+
+        if (Shell.Current is not null)
+        {
+            await Shell.Current.GoToAsync(route);
+            return;
+        }
+
+        var window = Application.Current?.Windows.FirstOrDefault();
+        if (window is not null)
         {
             window.Page = page;
         }

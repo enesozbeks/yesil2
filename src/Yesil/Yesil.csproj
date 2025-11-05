@@ -17,15 +17,42 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <MauiXaml Include="App.xaml" />
-    <MauiXaml Include="AppShell.xaml" />
-    <MauiXaml Include="Views\**\*.xaml" />
-    <MauiXaml Include="Components\**\*.xaml" />
-    <MauiXaml Include="Resources\Styles\*.xaml" />
+    <Compile Update="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="AppShell.xaml.cs">
+      <DependentUpon>AppShell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Components\**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="AppShell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\**\*.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Components\**\*.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Resources\Styles\*.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+
   <ItemGroup Condition="$([MSBuild]::IsOSPlatform('windows'))">
     <ApplicationDefinition Include="Platforms\Windows\App.xaml" />
   </ItemGroup>
+
   <ItemGroup>
     <None Remove="Resources\**" />
     <MauiImage Include="Resources\Images\**" />
