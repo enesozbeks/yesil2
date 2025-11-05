@@ -13,14 +13,7 @@
     <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <WindowsPackageType>None</WindowsPackageType>
-    <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Maui" Version="9.0.111" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.111" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.111" />
-    <PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.111" />
-  </ItemGroup>
 
   <ItemGroup>
     <MauiXaml Include="App.xaml" />

@@ -25,9 +25,13 @@ src/Yesil
 
 ## Başlangıç
 
-1. **Önkoşullar:** .NET 9 SDK (9.0.306 veya uyumlu bir sonraki özellik sürümü) ve `dotnet workload install maui` ile yüklenmiş .NET MAUI iş yükü.
+1. **Önkoşullar:** .NET 9 SDK (9.0.306 veya uyumlu bir sonraki özellik sürümü) ve `dotnet workload install maui` ile yüklenmiş .NET MAUI iş yükü. MAUI paketleri workload tarafından sağlanır; projeye manuel olarak `Microsoft.Maui.*` NuGet paketleri eklemeniz gerekmez.
 2. Kurulumu doğrulamak için terminalde `dotnet --info` komutunu çalıştırın; CLI'nin depo kökündeki `global.json` dosyasında belirtilen SDK sürümünü seçtiğini görmelisiniz.
 3. Depoyu klonlayın ve `src/Yesil/Yesil.csproj` projesini tercih ettiğiniz IDE (Visual Studio, Rider veya Visual Studio for Mac) ile açın.
 4. Hedef platform için MAUI yapı profilini seçip uygulamayı çalıştırın.
 
 > Not: Bu ortamda .NET SDK yüklü değildir; projeyi yerel geliştirme makinenizde derleyip çalıştırabilirsiniz.
+
+## Sorun giderme
+
+- `Microsoft.Maui` veya `Microsoft.Maui.Controls` paketlerini 9.x sürümüyle bulamadığını belirten bir NuGet hatası görürseniz, MAUI iş yükü eksiktir. `dotnet workload install maui` komutunu çalıştırarak gerekli paketleri yükleyin ve projedeki manuel MAUI paket referanslarını eklemeyin.
