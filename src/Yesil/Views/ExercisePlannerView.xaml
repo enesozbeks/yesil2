@@ -6,6 +6,7 @@
              xmlns:models="clr-namespace:Yesil.Models"
              x:Class="Yesil.Views.ExercisePlannerView"
              x:DataType="viewmodels:ExercisePlannerViewModel"
+             x:Name="ExercisePlannerPage"
              Title="Egzersiz">
     <ContentPage.Resources>
         <converters:CompletionToColorConverter x:Key="completionToColor" />
@@ -22,7 +23,9 @@
                                 <Label Text="Seviye: {Binding Seviye}" />
                                 <Label Text="Süre: {Binding Sure}" />
                                 <Label Text="Koç Notu: {Binding KoçNotu}" />
-                                <Button Text="Planı İncele" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ExercisePlannerViewModel}}, Path=PlanSecCommand}" CommandParameter="{Binding}" />
+                                <Button Text="Planı İncele"
+                                        Command="{Binding Source={x:Reference ExercisePlannerPage}, Path=BindingContext.PlanSecCommand}"
+                                        CommandParameter="{Binding}" />
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
