@@ -5,6 +5,7 @@ global using System.Runtime.CompilerServices;
 global using System.Collections.Generic;
 global using System.Linq;
 global using System.Threading.Tasks;
+global using System.Windows.Input;
 global using Microsoft.Maui;
 global using Microsoft.Maui.Controls;
 global using Microsoft.Maui.Controls.Xaml;
