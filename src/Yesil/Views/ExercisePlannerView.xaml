@@ -4,6 +4,7 @@
              xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
              xmlns:converters="clr-namespace:Yesil.Converters"
              xmlns:models="clr-namespace:Yesil.Models"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              x:Class="Yesil.Views.ExercisePlannerView"
              x:DataType="viewmodels:ExercisePlannerViewModel"
              x:Name="ExercisePlannerPage"
@@ -24,7 +25,7 @@
                                 <Label Text="Süre: {Binding Sure}" />
                                 <Label Text="Koç Notu: {Binding KoçNotu}" />
                                 <Button Text="Planı İncele"
-                                        Command="{Binding Source={x:Reference ExercisePlannerPage}, Path=BindingContext.PlanSecCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type controls:ContentPage}}, Path=BindingContext.PlanSecCommand}"
                                         CommandParameter="{Binding}" />
                             </VerticalStackLayout>
                         </Frame>

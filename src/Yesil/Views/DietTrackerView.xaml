@@ -4,6 +4,7 @@
              xmlns:viewmodels="clr-namespace:Yesil.ViewModels"
              xmlns:converters="clr-namespace:Yesil.Converters"
              xmlns:models="clr-namespace:Yesil.Models"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              xmlns:behaviors="clr-namespace:Yesil.Behaviors"
              x:Class="Yesil.Views.DietTrackerView"
              x:DataType="viewmodels:DietTrackerViewModel"
@@ -30,10 +31,10 @@
                                     <Label Text="{Binding Natureskor, Converter={StaticResource scoreToBadge}, StringFormat='Doğa Skoru: {0}'}" Grid.Row="2" />
                                     <StackLayout Grid.RowSpan="3" Grid.Column="1" Spacing="6" Margin="10,0,0,0">
                                         <Button Text="Ekle"
-                                                Command="{Binding Source={x:Reference DietTrackerPage}, Path=BindingContext.YiyecekEkleCommand}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type controls:ContentPage}}, Path=BindingContext.YiyecekEkleCommand}"
                                                 CommandParameter="{Binding}" />
                                         <Button Text="Envanter"
-                                                Command="{Binding Source={x:Reference DietTrackerPage}, Path=BindingContext.EnvantereEkleCommand}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type controls:ContentPage}}, Path=BindingContext.EnvantereEkleCommand}"
                                                 CommandParameter="{Binding}" />
                                     </StackLayout>
                                 </Grid>
@@ -66,7 +67,7 @@
                                               IsChecked="{Binding Tamamlandi}">
                                         <CheckBox.Behaviors>
                                             <behaviors:CheckedChangedToCommandBehavior
-                                                Command="{Binding Source={x:Reference DietTrackerPage}, Path=BindingContext.AlisverisGuncelleCommand}"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type controls:ContentPage}}, Path=BindingContext.AlisverisGuncelleCommand}"
                                                 CommandParameter="{Binding}" />
                                         </CheckBox.Behaviors>
                                     </CheckBox>

@@ -51,7 +51,9 @@
   </ItemGroup>
 
   <ItemGroup Condition="$([MSBuild]::IsOSPlatform('windows'))">
-    <ApplicationDefinition Include="Platforms\Windows\App.xaml" />
+    <Compile Update="Platforms\Windows\App.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

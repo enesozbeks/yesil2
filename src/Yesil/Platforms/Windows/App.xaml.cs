@@ -1,11 +1,6 @@
 namespace Yesil.WinUI;
 
-public partial class App : MauiWinUIApplication
+public class App : MauiWinUIApplication
 {
-    public App()
-    {
-        InitializeComponent();
-    }
-
     protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }
