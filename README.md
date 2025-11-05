@@ -30,6 +30,17 @@ src/Yesil
 3. Depoyu klonlayın ve `src/Yesil/Yesil.csproj` projesini tercih ettiğiniz IDE (Visual Studio, Rider veya Visual Studio for Mac) ile açın.
 4. Hedef platform için MAUI yapı profilini seçip uygulamayı çalıştırın.
 
+## Derleme ve test
+
+Bu depo içerisinde otomatik bir test projesi bulunmamakla birlikte, temel doğrulamayı `dotnet build` komutuyla gerçekleştirebilirsiniz.
+
+```bash
+cd src/Yesil
+dotnet build Yesil.csproj
+```
+
+İsteğe bağlı olarak, uygulamayı seçtiğiniz hedef platformda (Android, iOS, Mac Catalyst, Windows) emülatör ya da gerçek cihaz üzerinde çalıştırarak uçtan uca test yapabilirsiniz. MAUI önyükleme aşamasında hata almamak için gerekli emülatör/geliştirici sertifikası kurulumlarını tamamladığınızdan emin olun.
+
 > Not: Bu ortamda .NET SDK yüklü değildir; projeyi yerel geliştirme makinenizde derleyip çalıştırabilirsiniz.
 
 ## Sorun giderme
