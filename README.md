@@ -25,7 +25,7 @@ src/Yesil
 
 ## Başlangıç
 
-1. **Önkoşullar:** .NET 8 SDK ve .NET MAUI iş yükü.
+1. **Önkoşullar:** .NET 9 SDK ve .NET MAUI iş yükü.
 2. Depoyu klonlayın ve `src/Yesil/Yesil.csproj` projesini tercih ettiğiniz IDE (Visual Studio, Rider veya Visual Studio for Mac) ile açın.
 3. Hedef platform için MAUI yapı profilini seçip uygulamayı çalıştırın.
 
