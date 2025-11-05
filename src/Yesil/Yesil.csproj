@@ -23,6 +23,9 @@
     <MauiXaml Include="Components\**\*.xaml" />
     <MauiXaml Include="Resources\Styles\*.xaml" />
   </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('windows'))">
+    <ApplicationDefinition Include="Platforms\Windows\App.xaml" />
+  </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\**" />
     <MauiImage Include="Resources\Images\**" />

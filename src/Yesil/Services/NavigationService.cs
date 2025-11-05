@@ -12,19 +12,21 @@ public class NavigationService
     public async Task NavigateToAsync<TView>() where TView : Page
     {
         var page = _serviceProvider.GetRequiredService<TView>();
-        if (Application.Current?.MainPage is Shell shell)
+        var window = Application.Current?.Windows.FirstOrDefault();
+
+        if (window?.Page is Shell shell)
         {
             var route = typeof(TView).FullName ?? typeof(TView).Name;
-            if (!Routing.IsRouteRegistered(route))
+            if (!Routing.TryGetRoute(route, out _))
             {
                 Routing.RegisterRoute(route, typeof(TView));
             }
 
             await shell.GoToAsync(route);
         }
-        else
+        else if (window is not null)
         {
-            Application.Current!.MainPage = page;
+            window.Page = page;
         }
     }
 }
